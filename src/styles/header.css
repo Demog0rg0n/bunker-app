@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    background: url(https://phonoteka.org/uploads/posts/2022-02/1644390923_45-phonoteka-org-p-igrovoi-fon-dlya-prezentatsii-48.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-size: 20px;
+}
+
+.header{
+    margin-bottom: 25px;
+    width: 98.45vw;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    color: white;
+    font-family: 'Gilroy-Medium', sans-serif;
+}
+
+.header__tittle{
+    font-family: 'Gilroy-Bold', sans-serif;
+    font-size: 32px;
+    margin-left: 20px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.bunker{
+    width: 500px;
+}
+
+.disaster{
+    text-overflow: clip;
+    font-size: 20px;
+    width: 500px;
+    font-family: 'Gilroy-Medium', sans-serif;
+}

@@ -1,0 +1,108 @@
+.settings__button{
+    width: fit-content;
+    background-color: rgb(255, 255, 255);
+    height: 35px;
+    padding: 0px 20px;
+    font-size: 18px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.main-settings{
+    display: flex;
+    justify-content: center;
+}
+
+.general{
+    display: flex;
+    flex-direction: column;
+}
+
+.general button{
+    margin-bottom: 15px;
+}
+
+.header-settings{
+    padding: 15px;
+    width: 500px;
+    height: 700px;
+    background-color: rgb(255, 255, 255);
+    margin-left: 30px;
+}
+
+.settings-title{
+    text-align: center;
+    margin: 15px 0;
+}
+
+.header-settings textarea{
+    font-size: 18px;
+}
+
+.settings__button{
+    padding: 0px 15px;
+    transition: .1s linear;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.settings__button:hover{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.player-card{
+    position: relative;
+    width: 300px;
+    height: 510px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    margin-left: 30px;
+}
+
+.player-card__elem{
+    display: flex;
+    margin-top: 10px;
+}
+
+.player-card__elem img{
+    height: 50px;
+}
+
+.player-card__elem input{
+    width: 200px;
+    font-size: 18px;
+}
+
+.player-card__bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.player-card__bottom img{
+    width: 40px;
+    cursor: pointer;
+}
+
+.player-card__bottom img:active{
+    transform: translate(0px, 3px);
+}
+
+.player-card__midle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.vote input{
+    margin-left: 10px;
+    width: 25px;
+    font-size: 20px;
+}
+
+.rerol-button:hover{
+    cursor: pointer;
+}

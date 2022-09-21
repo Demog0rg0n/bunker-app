@@ -1,0 +1,100 @@
+.wrapper{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gilroy-Medium', sans-serif;
+}
+
+.webcams{
+    min-width: 100vw;
+    max-width: 100vw;
+    height: 78vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cam{
+    position: relative;
+    font-size: 18px;
+    align-items: flex-end;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.cam,
+.exiled-player{
+    margin: 0 10px;
+    width: 420px;
+    height: 235px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgb(0, 0, 0);
+    display: flex;
+    color: white;
+    position: relative;
+    
+}
+
+.exiled-player h1{
+    position: relative;
+    z-index: 100;
+}
+
+.exiled-player{
+    background: url("https://swoldemi.me/VR-Project-1/images/metal-door.png");
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gilroy-Light', sans-serif;
+}
+
+.exiled-player::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.cam__votes{
+    position: absolute;
+    border-bottom-right-radius: 10px;
+    width: 150px;
+    padding: 5px;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    top: 0px;
+    transition: .3s;
+    color: black;
+    font-size: 24px;
+    
+    transform: translate(-160px);
+}
+
+.active{
+    transform: translate(0px);
+}
+
+.cam__left{
+    margin-left: 5px;
+    width: 50px;
+}
+
+.cam__right{
+    margin: 5px;
+    text-align: right;
+    width: 180px;
+}
+
+.cam__right__elem{
+    margin-top: 7px;
+}
+
+.cam__gender{
+    width: 50px;
+    margin-top: 5px;
+}
