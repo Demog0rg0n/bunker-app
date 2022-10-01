@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bunker-app/static/css/main.959a8f69.css",
+    "main.js": "/bunker-app/static/js/main.6fad685a.js",
+    "index.html": "/bunker-app/index.html",
+    "main.959a8f69.css.map": "/bunker-app/static/css/main.959a8f69.css.map",
+    "main.6fad685a.js.map": "/bunker-app/static/js/main.6fad685a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.959a8f69.css",
+    "static/js/main.6fad685a.js"
+  ]
+}
