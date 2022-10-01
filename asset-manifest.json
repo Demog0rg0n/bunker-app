@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/bunker-app/static/css/main.959a8f69.css",
-    "main.js": "/bunker-app/static/js/main.6fad685a.js",
+    "main.js": "/bunker-app/static/js/main.c0f3fc55.js",
     "index.html": "/bunker-app/index.html",
     "main.959a8f69.css.map": "/bunker-app/static/css/main.959a8f69.css.map",
-    "main.6fad685a.js.map": "/bunker-app/static/js/main.6fad685a.js.map"
+    "main.c0f3fc55.js.map": "/bunker-app/static/js/main.c0f3fc55.js.map"
   },
   "entrypoints": [
     "static/css/main.959a8f69.css",
-    "static/js/main.6fad685a.js"
+    "static/js/main.c0f3fc55.js"
   ]
 }
