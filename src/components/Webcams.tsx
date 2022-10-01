@@ -4,16 +4,17 @@ import '../styles/webcams.css'
 
 import { useSelector } from 'react-redux'
 import ExiledPlayer from './ExiledPlayer'
+import { RootState } from '../redux/storage'
+import { InitialPlayer } from '../redux/supportingScripts'
 
-
-const Webcams = () => {
-  const players = useSelector(state => state.Cards.players)
+const Webcams: React.FC = () => {
+  const players = useSelector((state: RootState) => state.Cards.players)
   return (
     <div className="webcams">
       { 
-        players.map((player, index) => (
+        players.map((player: InitialPlayer, index: number) => (
           player?
-          <Camera key={ index + 1 } {...player } index = {index} />:
+          <Camera key={ index + 1 }  {...player} />:
           <ExiledPlayer />
         ))
       }

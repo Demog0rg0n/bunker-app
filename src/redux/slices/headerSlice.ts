@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+type HeaderSliceState = {
+  disaster: string;
+  bunker: string;
+}
+
+const initialState: HeaderSliceState = {
   disaster: '',
   bunker: '',
 };
@@ -9,11 +14,11 @@ export const headerSlice = createSlice({
   name: 'header',
   initialState,
   reducers: {
-    getDisaster(state, action) {
+    getDisaster(state, action: PayloadAction<string>) {
       state.disaster = action.payload;
     },
 
-    getBunker(state, action) {
+    getBunker(state, action: PayloadAction<string>) {
       state.bunker = action.payload;
     },
   },

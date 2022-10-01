@@ -3,15 +3,16 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getVote } from '../../redux/slices/adminSlice'
 import {changeProfession, changeHealth, changePhobia, changeHobby, changeFact1, changeFact2, removePlayer} from '../../redux/slices/cardSlice'
+import { RootState } from '../../redux/storage'
 
-const PlayerCardSettings = () => {
+const PlayerCardSettings: React.FC = () => {
   const [id, setId] = React.useState(1)
-  const card = useSelector(state => state.Cards.playersCard)[id - 1]
+  const card = useSelector((state: RootState) => state.Cards.playersCard)[id - 1]
   const dispatch = useDispatch()
 
-  function voting(id, event){
-    if(event.code === "Enter"){
-      dispatch(getVote({id, data: event.target.value}))
+  function voting(id: number, key: string, value: string){
+    if(key === "Enter"){
+      dispatch(getVote({id, data: value}))
       alert("Голос засчитан")
     }
   }
@@ -67,7 +68,7 @@ const PlayerCardSettings = () => {
         <div className="player-card__midle">
           <div className="vote">
             <span>Голос</span>
-            <input onKeyDown = {(event) => voting(id, event)} type="text" />
+            <input onKeyDown = {(event) => voting(id, event.code, event.currentTarget.value)} type="text" />
           </div>
           <button onClick={() => dispatch(removePlayer(id))} className='settings__button'>Выгнать</button>
         </div>

@@ -5,6 +5,7 @@ import featuries from '../../characteristics.json'
 import { useSelector, useDispatch } from 'react-redux'
 import { getBunker, getDisaster } from '../../redux/slices/headerSlice'
 import { resetVotes, startVoting } from '../../redux/slices/adminSlice';
+import { RootState } from '../../redux/storage';
 
 function resetCards() {
   localStorage.clear();
@@ -19,8 +20,8 @@ function resetCards() {
   localStorage.setItem('actionCard2', JSON.stringify(featuries.actionCard2));
 }
 
-const HeaderSettings = () => {
-  const { bunker, disaster } = useSelector(state => state.Header)
+const HeaderSettings: React.FC = () => {
+  const { bunker, disaster } = useSelector((state: RootState) => state.Header)
   const dispatch = useDispatch();
   return (
     <div className="header-settings">
@@ -28,17 +29,17 @@ const HeaderSettings = () => {
         <span>Катастрофа</span>
         <textarea
           onChange={(event) => dispatch(getDisaster(event.target.value))} 
-          value={disaster}
-          cols="45" 
-          rows="6">
+          value = {disaster}
+          cols = {45}
+          rows = {6}>
         </textarea>
         <span>Бункер</span>
         <textarea
           wrap='hard'
           onChange={(event) => dispatch(getBunker(event.target.value))} 
-          value={bunker}
-          cols="45"
-          rows="6" >
+          value = {bunker}
+          cols = {45}
+          rows = {6} >
         </textarea>
         <div className="general">
           <h1 className="settings-title">Общие настройки</h1>

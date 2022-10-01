@@ -13,7 +13,13 @@ const actionCards1 =  [
   { func: stealProfession, description: 'Ворует профессию у игрока перед вами' },
 ]
 
-const ActionCard = ({ actionCard1, actionCard2 }) => {
+type ActionCardProps = {
+  actionCard1: number;
+  actionCard2: string;
+}
+
+const ActionCard: React.FC<ActionCardProps> = ({ actionCard1, actionCard2 }) => {
+  const id = window.location.pathname.slice(7)
   const dispatch = useDispatch()
   return (
     <div className='action-cards'>
@@ -23,7 +29,7 @@ const ActionCard = ({ actionCard1, actionCard2 }) => {
           actionCard1 >= 0? 
             <>
               <p>{actionCards1[actionCard1].description}</p>
-              <button onClick={() => dispatch(actionCards1[actionCard1].func())} className='cardButton'>Использовать</button>
+              <button onClick={() => dispatch(actionCards1[actionCard1].func(+id))} className='cardButton'>Использовать</button>
             </>:
             "??????????"
         }

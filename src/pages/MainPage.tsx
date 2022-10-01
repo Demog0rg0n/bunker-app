@@ -4,7 +4,9 @@ import PlayerIcon from '../components/PlayerIcon'
 
 import '../styles/mainPage.css'
 
-const MainPage = () => {
+
+
+const MainPage: React.FC = () => {
     return (
     <div className="main">
         <div className="game-table">
@@ -16,9 +18,9 @@ const MainPage = () => {
                 <PlayerIcon id = "6" />  
             </div>
             <div className="game-table__middle">
-                <PlayerIcon id = "1" type = "player-left" />
+                <PlayerIcon id = "1" />
                 <Link className = "table" to={"/stream"}>Стрим</Link>
-                <PlayerIcon id = "7" type = "player-right" />
+                <PlayerIcon id = "7"  />
             </div>
             <div className="game-table__bottom">
                 <PlayerIcon id = "8" />

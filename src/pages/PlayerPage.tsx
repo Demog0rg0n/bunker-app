@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux';
 import Webcams from '../components/Webcams'
 import Card from '../components/Card'
 import ActionCard from '../components/ActionCard';
+import { RootState } from '../redux/storage';
 
-const PlayerPage = () => {
-    const cards = useSelector(state => state.Cards.playersCard)
-    const players = useSelector(state => state.Cards.players)
+const PlayerPage: React.FC = () => {
+    const cards = useSelector((state: RootState) => state.Cards.playersCard)
     return (
         <div className="wrapper">
+            <>
             <Routes>
             {
                 cards.map((card, index) => (
@@ -19,13 +20,7 @@ const PlayerPage = () => {
                 ))
             }    
             </Routes>
-            <Webcams />
-            {
-                React.useEffect(() => {
-                    <Webcams />
-                }, [players])
-            }
-            
+            <Webcams />      
             <Routes>
             {
                 cards.map((card, index) => (
@@ -33,6 +28,8 @@ const PlayerPage = () => {
                 ))
             }
             </Routes>
+            </>
+            
         </div>
     )
 }

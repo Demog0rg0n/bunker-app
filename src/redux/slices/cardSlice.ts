@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   stealFeature,
@@ -8,7 +8,24 @@ import {
   InitialPlayer,
 } from '../supportingScripts';
 
-const initialState = {
+export type ShowFeatureType = {
+  name: string
+  age: string;
+  profession: string;
+  health: string;
+  phobia: string;
+  hobby: string;
+  fact1: string;
+  fact2: string;
+}
+
+export interface CardSliceState {
+  players: InitialPlayer[];
+  playersCard: InitialCard[];
+  departedPlayers: InitialPlayer[];
+}
+
+const initialState: CardSliceState = {
   players: [
     new InitialPlayer(1),
     new InitialPlayer(2),
@@ -45,37 +62,40 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     generateCard(state) {
-      let id = window.location.pathname.slice(7);
-      state.playersCard[id - 1] = new Card(id);
-      state.playersCard[id - 1].isGenerated = true;
+      let id = (window.location.pathname.slice(7));
+      state.playersCard[+id - 1] = new Card(+id);
     },
-    removePlayer(state, action) {
-      state.departedPlayers = state.players.splice(action.payload - 1, 1, '');
+    removePlayer(state, action: PayloadAction<number>) {
+      state.departedPlayers = state.players.splice(action.payload - 1, 1);
     },
-    showFeature(state, action) {
-      let id = window.location.pathname.slice(7);
-      state.players[id - 1][action.payload] = state.playersCard[id - 1][action.payload];
+    showGender(state){
+      let id = +window.location.pathname.slice(7) - 1;
+      state.players[id].gender = state.playersCard[id].gender;
+    },
+    showFeature(state, action: PayloadAction<string>) {
+      let id = +window.location.pathname.slice(7) - 1;
+      state.players[id][action.payload as keyof ShowFeatureType] = state.playersCard[id][action.payload as keyof ShowFeatureType];
     },
     getName(state, action) {
-      let id = window.location.pathname.slice(7);
+      let id = Number(window.location.pathname.slice(7));
       state.players[id - 1].name = action.payload;
     },
-    changeProfession(state, action) {
+    changeProfession(state, action: PayloadAction<number>) {
       changeFeature(state, action.payload, 'profession');
     },
-    changeHealth(state, action) {
+    changeHealth(state, action: PayloadAction<number>) {
       changeFeature(state, action.payload, 'health');
     },
-    changePhobia(state, action) {
+    changePhobia(state, action: PayloadAction<number>) {
       changeFeature(state, action.payload, 'phobia');
     },
-    changeFact1(state, action) {
+    changeFact1(state, action: PayloadAction<number>) {
       changeFeature(state, action.payload, 'fact1');
     },
-    changeFact2(state, action) {
+    changeFact2(state, action: PayloadAction<number>) {
       changeFeature(state, action.payload, 'fact2');
     },
-    changeHobby(state, action) {
+    changeHobby(state, action: PayloadAction<number>) {
       changeFeature(state, action.payload, 'hobby');
     },
 
@@ -94,6 +114,7 @@ export const cardSlice = createSlice({
 export const {
   generateCard,
   showFeature,
+  showGender,
   getName,
   changeProfession,
   changeHealth,

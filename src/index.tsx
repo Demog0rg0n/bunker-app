@@ -7,8 +7,9 @@ import store, { persistor } from './redux/storage';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+
+  const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+  root.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -17,3 +18,6 @@ root.render(
     </Provider>
   </BrowserRouter>,
 );
+
+
+

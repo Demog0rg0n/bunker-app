@@ -1,8 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+interface VotesSliceType {
+  isStarted: boolean;
+  votes: Array<number[]>;
+}
+
+const initialState: VotesSliceType = {
   isStarted: false,
-  votes: JSON.parse(localStorage.getItem('votes')) || [
+  votes: JSON.parse(localStorage.getItem('votes') as any)  || [
     [],
     [],
     [],
@@ -22,8 +27,8 @@ export const votingSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    getVote(state, action) {
-      state.votes[action.payload.data - 1].push(action.payload.id);
+    getVote(state, action: PayloadAction<{data: string, id: number}>) {
+      state.votes[+action.payload.data - 1].push(action.payload.id);
       localStorage.setItem('votes', JSON.stringify(state.votes));
     },
     resetVotes(state) {
