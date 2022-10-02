@@ -16,6 +16,7 @@ export class InitialPlayer {
   hobby: string;
   fact1: string;
   fact2: string;
+  isExiled: boolean;
   constructor(id: number){
     this.id = id;
     this.name = 'Имя';
@@ -30,6 +31,7 @@ export class InitialPlayer {
     this.hobby = 'Хобби';
     this.fact1 = 'Факт 1';
     this.fact2 = 'Факт 2';
+    this.isExiled = false;
   }
 }
 

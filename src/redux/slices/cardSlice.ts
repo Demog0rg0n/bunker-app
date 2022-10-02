@@ -22,7 +22,6 @@ export type ShowFeatureType = {
 export interface CardSliceState {
   players: InitialPlayer[];
   playersCard: InitialCard[];
-  departedPlayers: InitialPlayer[];
 }
 
 const initialState: CardSliceState = {
@@ -54,7 +53,6 @@ const initialState: CardSliceState = {
     new InitialCard(11),
     new InitialCard(12),
   ],
-  departedPlayers: [],
 };
 
 export const cardSlice = createSlice({
@@ -62,22 +60,22 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     generateCard(state) {
-      let id = (window.location.pathname.slice(7));
-      state.playersCard[+id - 1] = new Card(+id);
+      let id = +(window.location.pathname.slice(18)) - 1;
+      state.playersCard[id] = new Card(id);
     },
     removePlayer(state, action: PayloadAction<number>) {
-      state.departedPlayers = state.players.splice(action.payload - 1, 1);
+      state.players[action.payload - 1].isExiled = true;
     },
     showGender(state){
-      let id = +window.location.pathname.slice(7) - 1;
+      let id = +window.location.pathname.slice(18) - 1;
       state.players[id].gender = state.playersCard[id].gender;
     },
     showFeature(state, action: PayloadAction<string>) {
-      let id = +window.location.pathname.slice(7) - 1;
+      let id = +window.location.pathname.slice(18) - 1;
       state.players[id][action.payload as keyof ShowFeatureType] = state.playersCard[id][action.payload as keyof ShowFeatureType];
     },
     getName(state, action) {
-      let id = Number(window.location.pathname.slice(7));
+      let id = Number(window.location.pathname.slice(18));
       state.players[id - 1].name = action.payload;
     },
     changeProfession(state, action: PayloadAction<number>) {

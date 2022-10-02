@@ -8,9 +8,8 @@
     transition: .2s linear;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
-
+    z-index: 100;
 }
-
 
 .specifications:hover{
     transform: translate(-240px);

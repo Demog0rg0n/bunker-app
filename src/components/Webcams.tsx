@@ -13,7 +13,7 @@ const Webcams: React.FC = () => {
     <div className="webcams">
       { 
         players.map((player: InitialPlayer, index: number) => (
-          player?
+          !player.isExiled?
           <Camera key={ index + 1 }  {...player} />:
           <ExiledPlayer />
         ))

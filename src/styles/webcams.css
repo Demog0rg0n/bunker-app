@@ -25,6 +25,7 @@
 
 .cam,
 .exiled-player{
+    z-index: 1;
     margin: 0 10px;
     width: 420px;
     height: 235px;
