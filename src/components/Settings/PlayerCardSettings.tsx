@@ -2,12 +2,12 @@ import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { getVote } from '../../redux/slices/adminSlice'
-import {changeProfession, changeHealth, changePhobia, changeHobby, changeFact1, changeFact2, removePlayer} from '../../redux/slices/cardSlice'
+import {changeProfession, changeHealth, changePhobia, changeHobby, changeFact1, changeFact2, removePlayer} from '../../redux/slices/playerSlice'
 import { RootState } from '../../redux/storage'
 
 const PlayerCardSettings: React.FC = () => {
   const [id, setId] = React.useState(1)
-  const card = useSelector((state: RootState) => state.Cards.playersCard)[id - 1]
+  const card = useSelector((state: RootState) => state.Players.playersCard)[id - 1]
   const dispatch = useDispatch()
 
   function voting(id: number, key: string, value: string){

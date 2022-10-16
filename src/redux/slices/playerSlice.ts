@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 import {
   stealFeature,
@@ -22,6 +23,28 @@ export type ShowFeatureType = {
 export interface CardSliceState {
   players: InitialPlayer[];
   playersCard: InitialCard[];
+}
+
+// export const fetchPlayers = createAsyncThunk("player/fetchPlayerStatus", async () => {
+//   try{
+//     const { data } = await axios.get("http://localhost:5000/players")
+//     console.log('Запрос отправлен');
+//     fetchPlayers()
+//     return data
+//   } catch (e){
+//     console.log(e)
+//     setTimeout(() => {
+//       fetchPlayers()
+//     }, 1000)
+//   }
+  
+// })
+
+export function updatePlayer(id: number, featureType: string, feature: string | {link: string, data: string}) {
+  axios.put("http://localhost:5000/player", {
+    id,
+    [featureType]: feature
+  })
 }
 
 const initialState: CardSliceState = {
@@ -59,9 +82,12 @@ export const cardSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
+    setPlayers(state, action){
+      state.players = action.payload
+    },
     generateCard(state) {
-      let id = +(window.location.pathname.slice(18)) - 1;
-      state.playersCard[id] = new Card(id);
+      let id = +(window.location.pathname.slice(18));
+      state.playersCard[id - 1] = new Card(id);
     },
     removePlayer(state, action: PayloadAction<number>) {
       state.players[action.payload - 1].isExiled = true;
@@ -69,12 +95,14 @@ export const cardSlice = createSlice({
     showGender(state){
       let id = +window.location.pathname.slice(18) - 1;
       state.players[id].gender = state.playersCard[id].gender;
+      updatePlayer(id, "gender", state.players[id].gender)
     },
     showFeature(state, action: PayloadAction<string>) {
       let id = +window.location.pathname.slice(18) - 1;
       state.players[id][action.payload as keyof ShowFeatureType] = state.playersCard[id][action.payload as keyof ShowFeatureType];
+      updatePlayer(id + 1, action.payload, state.players[id][action.payload as keyof ShowFeatureType])
     },
-    getName(state, action) {
+    getName(state, action: PayloadAction<string>) {
       let id = Number(window.location.pathname.slice(18));
       state.players[id - 1].name = action.payload;
     },
@@ -107,7 +135,13 @@ export const cardSlice = createSlice({
       stealFeature(state, 'phobia');
     },
   },
-});
+  // extraReducers: builder => {
+  //   builder.addCase(fetchPlayers.fulfilled, (state, { payload }) => {
+  //     state.players = payload
+  //     fetchPlayers()
+  //   })
+  // },
+})
 
 export const {
   generateCard,
@@ -124,6 +158,7 @@ export const {
   stealPhobia,
   stealProfession,
   removePlayer,
+  setPlayers
 } = cardSlice.actions;
 
 export default cardSlice.reducer;

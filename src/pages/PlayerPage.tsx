@@ -9,7 +9,7 @@ import ActionCard from '../components/ActionCard';
 import { RootState } from '../redux/storage';
 
 const PlayerPage: React.FC = () => {
-    const cards = useSelector((state: RootState) => state.Cards.playersCard)
+    const cards = useSelector((state: RootState) => state.Players.playersCard)
     return (
         <div className="wrapper">
             <>

@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import Cards from './slices/cardSlice';
+import Players from './slices/playerSlice';
 import Header from './slices/headerSlice';
 import Votes from './slices/adminSlice';
 
@@ -10,7 +10,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
-  Cards,
+  Players,
   Header,
   Votes,
 });

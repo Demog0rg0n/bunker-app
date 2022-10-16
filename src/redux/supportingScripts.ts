@@ -1,4 +1,4 @@
-import { CardSliceState, ShowFeatureType } from "./slices/cardSlice";
+import { CardSliceState, ShowFeatureType } from "./slices/playerSlice";
 
 export type GenderType = {
   link: string;

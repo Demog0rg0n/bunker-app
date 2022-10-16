@@ -3,14 +3,13 @@ import React from 'react'
 import '../styles/card.css'
 
 import { useDispatch } from 'react-redux'
-import { generateCard, getName, showFeature, showGender } from '../redux/slices/cardSlice'
-import { useLocation } from 'react-router'
-import { InitialCard } from '../redux/supportingScripts'
 
-const Card: React.FC<InitialCard> = ({ profession, age, gender, health, phobia, hobby, fact1, fact2, isGenerated }) => {
-  const { pathname } = useLocation()
-  const id = pathname.slice(7)
+import { generateCard, getName, showFeature, showGender } from '../redux/slices/playerSlice'
+import { InitialCard, } from '../redux/supportingScripts'
+
+const Card: React.FC<InitialCard> = ({ id, profession, age, gender, health, phobia, hobby, fact1, fact2, isGenerated }) => {
   const dispatch = useDispatch()
+  
   return (
     <div className="specifications">
       <div className="specifications__tittle">Карточка игрока</div>

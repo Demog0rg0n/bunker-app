@@ -6,8 +6,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getBunker, getDisaster } from '../../redux/slices/headerSlice'
 import { resetVotes, startVoting } from '../../redux/slices/adminSlice';
 import { RootState } from '../../redux/storage';
+import axios from 'axios';
+import { InitialPlayer } from '../../redux/supportingScripts';
 
-function resetCards() {
+function resetPlayers(){
+  for(let i = 1; i<= 12; i++){
+    axios.put("http://localhost:5000/player", new InitialPlayer(i))
+  }
+}
+
+async function resetCards() {
   localStorage.clear();
   localStorage.setItem('profession', JSON.stringify(featuries.professions));
   localStorage.setItem('age', JSON.stringify(featuries.age));
@@ -18,10 +26,12 @@ function resetCards() {
   localStorage.setItem('fact2', JSON.stringify(featuries.facts2));
   localStorage.setItem('gender', JSON.stringify(featuries.gender));
   localStorage.setItem('actionCard2', JSON.stringify(featuries.actionCard2));
+  resetPlayers()
 }
 
 const HeaderSettings: React.FC = () => {
   const { bunker, disaster } = useSelector((state: RootState) => state.Header)
+  const players = useSelector((state: RootState) => state.Players.players)
   const dispatch = useDispatch();
   return (
     <div className="header-settings">
@@ -43,7 +53,7 @@ const HeaderSettings: React.FC = () => {
         </textarea>
         <div className="general">
           <h1 className="settings-title">Общие настройки</h1>
-          <button onClick = {resetCards} className="settings__button">Сбросить карточки</button>
+          <button onClick = {() => resetCards()} className="settings__button">Сбросить карточки</button>
           <button onClick = {() => dispatch(resetVotes())} className="settings__button">Сбросить голоса</button>
           <button onClick = {() => dispatch(startVoting())} className="settings__button">Голосование</button>
         </div>

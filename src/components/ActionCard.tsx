@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { changeProfession, changeHealth, changePhobia, stealHealth, stealPhobia, stealProfession } from '../redux/slices/cardSlice'
+import { changeProfession, changeHealth, changePhobia, stealHealth, stealPhobia, stealProfession } from '../redux/slices/playerSlice'
 
 import '../styles/actionCard.css'
 

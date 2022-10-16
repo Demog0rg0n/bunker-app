@@ -7,8 +7,10 @@ import ExiledPlayer from './ExiledPlayer'
 import { RootState } from '../redux/storage'
 import { InitialPlayer } from '../redux/supportingScripts'
 
+
+
 const Webcams: React.FC = () => {
-  const players = useSelector((state: RootState) => state.Cards.players)
+  const players = useSelector((state: RootState) => state.Players.players)
   return (
     <div className="webcams">
       { 
