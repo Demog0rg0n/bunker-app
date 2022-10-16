@@ -85,22 +85,19 @@ export const cardSlice = createSlice({
     setPlayers(state, action){
       state.players = action.payload
     },
-    generateCard(state) {
-      let id = +(window.location.pathname.slice(18));
-      state.playersCard[id - 1] = new Card(id);
+    generateCard(state, { payload }: PayloadAction<number>) {
+      state.playersCard[payload - 1] = new Card(payload);
     },
-    removePlayer(state, action: PayloadAction<number>) {
-      state.players[action.payload - 1].isExiled = true;
+    removePlayer(state, { payload }: PayloadAction<number>) {
+      state.players[payload - 1].isExiled = true;
     },
-    showGender(state){
-      let id = +window.location.pathname.slice(18) - 1;
-      state.players[id].gender = state.playersCard[id].gender;
-      updatePlayer(id, "gender", state.players[id].gender)
+    showGender(state, { payload }: PayloadAction<number>){
+      state.players[payload - 1].gender = state.playersCard[payload - 1].gender;
+      updatePlayer(payload - 1, "gender", state.players[payload - 1].gender)
     },
-    showFeature(state, action: PayloadAction<string>) {
-      let id = +window.location.pathname.slice(18) - 1;
-      state.players[id][action.payload as keyof ShowFeatureType] = state.playersCard[id][action.payload as keyof ShowFeatureType];
-      updatePlayer(id + 1, action.payload, state.players[id][action.payload as keyof ShowFeatureType])
+    showFeature(state, { payload }: PayloadAction<{feature: string, id: number}>) {
+      state.players[payload.id - 1][payload.feature as keyof ShowFeatureType] = state.playersCard[payload.id - 1][payload.feature as keyof ShowFeatureType];
+      updatePlayer(payload.id, payload.feature, state.players[payload.id - 1][payload.feature as keyof ShowFeatureType])
     },
     getName(state, action: PayloadAction<string>) {
       let id = Number(window.location.pathname.slice(18));
