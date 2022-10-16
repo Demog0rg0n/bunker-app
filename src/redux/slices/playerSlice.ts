@@ -93,7 +93,7 @@ export const cardSlice = createSlice({
     },
     showGender(state, { payload }: PayloadAction<number>){
       state.players[payload - 1].gender = state.playersCard[payload - 1].gender;
-      updatePlayer(payload - 1, "gender", state.players[payload - 1].gender)
+      updatePlayer(payload, "gender", state.players[payload - 1].gender)
     },
     showFeature(state, { payload }: PayloadAction<{feature: string, id: number}>) {
       state.players[payload.id - 1][payload.feature as keyof ShowFeatureType] = state.playersCard[payload.id - 1][payload.feature as keyof ShowFeatureType];
