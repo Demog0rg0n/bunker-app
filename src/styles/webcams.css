@@ -26,9 +26,9 @@
 .cam,
 .exiled-player{
     z-index: 1;
-    margin: 0 10px;
-    width: 420px;
-    height: 235px;
+    width: 440px;
+    margin: 5px;
+    height: 240px;
     background-color: rgba(0, 0, 0, 0.5);
     border: 2px solid rgb(0, 0, 0);
     display: flex;
@@ -81,7 +81,11 @@
 }
 
 .cam__left{
-    margin-left: 5px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 97%;
 }
 
 .cam__right{
@@ -90,11 +94,28 @@
     width: 180px;
 }
 
-.cam__right__elem{
+.cam__feature{
     margin-top: 7px;
 }
 
-.cam__gender{
-    width: 50px;
-    margin-top: 5px;
+.cam__gender-age{
+    display: flex;
+}
+
+.cam__gender-age div{
+    background-color: rgb(249, 129, 44);
+    color: black;
+    padding: 2px;
+    margin-right: 8px;
+    font-weight: 700;
+}
+
+.cam__name{
+    margin: 5px 0px;
+    min-width: 250px;
+    padding-left: 5px;
+    font-size: 20px;
+    color:rgb(0, 0, 0);
+    background-color: rgb(249, 129, 44);
+    background: linear-gradient(90deg, rgb(249, 129, 44), rgba(255, 255, 255, 0));
 }

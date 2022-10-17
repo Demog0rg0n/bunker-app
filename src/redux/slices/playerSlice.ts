@@ -12,6 +12,7 @@ import {
 export type ShowFeatureType = {
   name: string
   age: string;
+  gender: string;
   profession: string;
   health: string;
   phobia: string;
@@ -41,6 +42,13 @@ export interface CardSliceState {
 // })
 
 export function updatePlayer(id: number, featureType: string, feature: string | {link: string, data: string}) {
+  axios.put("http://localhost:5000/player", {
+    id,
+    [featureType]: feature
+  })
+}
+
+export function updateCard(id: number, featureType: string, feature: string | {link: string, data: string}) {
   axios.put("http://localhost:5000/player", {
     id,
     [featureType]: feature
@@ -91,17 +99,12 @@ export const cardSlice = createSlice({
     removePlayer(state, { payload }: PayloadAction<number>) {
       state.players[payload - 1].isExiled = true;
     },
-    showGender(state, { payload }: PayloadAction<number>){
-      state.players[payload - 1].gender = state.playersCard[payload - 1].gender;
-      updatePlayer(payload, "gender", state.players[payload - 1].gender)
-    },
     showFeature(state, { payload }: PayloadAction<{feature: string, id: number}>) {
       state.players[payload.id - 1][payload.feature as keyof ShowFeatureType] = state.playersCard[payload.id - 1][payload.feature as keyof ShowFeatureType];
       updatePlayer(payload.id, payload.feature, state.players[payload.id - 1][payload.feature as keyof ShowFeatureType])
     },
-    getName(state, action: PayloadAction<string>) {
-      let id = Number(window.location.pathname.slice(18));
-      state.players[id - 1].name = action.payload;
+    getName(state, { payload }: PayloadAction<{name: string, id: number}>) {
+      state.players[payload.id - 1].name = payload.name;
     },
     changeProfession(state, action: PayloadAction<number>) {
       changeFeature(state, action.payload, 'profession');
@@ -143,7 +146,6 @@ export const cardSlice = createSlice({
 export const {
   generateCard,
   showFeature,
-  showGender,
   getName,
   changeProfession,
   changeHealth,

@@ -1,10 +1,5 @@
 import { CardSliceState, ShowFeatureType } from "./slices/playerSlice";
 
-export type GenderType = {
-  link: string;
-  data: string
-}
-
 export class InitialPlayer {
   id: number
   name: string
@@ -12,7 +7,7 @@ export class InitialPlayer {
   profession: string;
   health: string;
   phobia: string;
-  gender: GenderType;
+  gender: string;
   hobby: string;
   fact1: string;
   fact2: string;
@@ -20,12 +15,9 @@ export class InitialPlayer {
   constructor(id: number){
     this.id = id;
     this.name = 'Имя';
-    this.age = 'Возраст';
+    this.age = '??';
     this.profession = 'Профессия';
-    this.gender = {
-      link: 'https://kartinkin.net/uploads/posts/2021-01/1611412761_43-p-chernii-fon-so-znakom-voprosa-48.jpg',
-      data: "??????"
-    };
+    this.gender = "??";
     this.health = 'Здоровье';
     this.phobia = 'Фобия';
     this.hobby = 'Хобби';
@@ -42,7 +34,7 @@ export class InitialCard {
   profession: string;
   health: string;
   phobia: string;
-  gender: GenderType;
+  gender: string;
   hobby: string;
   fact1: string;
   fact2: string;
@@ -54,10 +46,7 @@ export class InitialCard {
     this.name = '';
     this.age = '???';
     this.profession = '??????????';
-    this.gender = {
-      link: 'https://kartinkin.net/uploads/posts/2021-01/1611412761_43-p-chernii-fon-so-znakom-voprosa-48.jpg',
-      data: "??????"
-    }
+    this.gender = "?"
     this.health = '??????????';
     this.phobia = '??????????';
     this.hobby = '??????????';
@@ -74,12 +63,11 @@ export function getRandomInt (min: number, max: number): number {
 }
 
 function getGender() {
-  if (localStorage.getItem('gender')){
-    let genders = JSON.parse(localStorage.getItem('gender') as string);
-    if(genders.length){
-      return genders[getRandomInt(0, 1)];
-    }
+  const gender = Math.round(Math.random())
+  if(gender){
+    return "М"
   }
+  return "Ж"
 }
 
 export function getRandomFeature(key: string) {
@@ -97,7 +85,7 @@ export class Card {
   profession: string;
   health: string;
   phobia: string;
-  gender: GenderType;
+  gender: string;
   hobby: string;
   fact1: string;
   fact2: string;

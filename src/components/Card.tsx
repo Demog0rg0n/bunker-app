@@ -4,7 +4,7 @@ import '../styles/card.css'
 
 import { useDispatch } from 'react-redux'
 
-import { generateCard, getName, showFeature, showGender } from '../redux/slices/playerSlice'
+import { generateCard, getName, showFeature } from '../redux/slices/playerSlice'
 import { InitialCard, } from '../redux/supportingScripts'
 
 const Card: React.FC<InitialCard> = ({ id, profession, age, gender, health, phobia, hobby, fact1, fact2, isGenerated }) => {
@@ -15,8 +15,8 @@ const Card: React.FC<InitialCard> = ({ id, profession, age, gender, health, phob
       <div className="specifications__tittle">Карточка игрока</div>
       <div className="specifications__elem">Номер игрока: {id}</div>
       <span>Имя</span>
-      <input onChange={(event) => dispatch(getName( event.target.value ))} type="text" className="specifications__input" />
-      <div onClick={() => dispatch(showGender(id))} className="specifications__elem">Пол: {gender.data}</div>
+      <input onChange={(event) => dispatch(getName( {name: event.target.value, id} ))} type="text" className="specifications__input" />
+      <div onClick={() => dispatch(showFeature({feature: "gender", id}))} className="specifications__elem">Пол: {gender}</div>
       <div onClick={() => dispatch(showFeature({feature: "age", id}))} className="specifications__elem">Возраст: {age} лет</div>
       <div onClick={() => dispatch(showFeature({feature: "profession", id}))} className="specifications__elem">Профессия:<br />{profession}</div>
       <div onClick={() => dispatch(showFeature({feature: "health", id}))} className="specifications__elem">Здоровье:<br />{health}</div>

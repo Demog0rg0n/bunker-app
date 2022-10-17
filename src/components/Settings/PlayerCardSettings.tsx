@@ -2,8 +2,9 @@ import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { getVote } from '../../redux/slices/adminSlice'
-import {changeProfession, changeHealth, changePhobia, changeHobby, changeFact1, changeFact2, removePlayer} from '../../redux/slices/playerSlice'
+import { removePlayer, updatePlayer} from '../../redux/slices/playerSlice'
 import { RootState } from '../../redux/storage'
+import { getRandomFeature } from '../../redux/supportingScripts'
 
 const PlayerCardSettings: React.FC = () => {
   const [id, setId] = React.useState(1)
@@ -25,14 +26,14 @@ const PlayerCardSettings: React.FC = () => {
             <span>Профессия</span>
             <input onChange={(event) => alert(event.target.value)} type="text" value={card.profession} />  
           </div>
-          <img onClick = {() => dispatch(changeProfession(id))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
+          <img onClick = {() => updatePlayer(id, "profession", getRandomFeature("profession"))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
         </div>
         <div className="player-card__elem">
           <div className="player-card__elem__left">
             <span>Здоровье</span>
             <input onChange={(event) => alert(event.target.value)} type="text" value={card.health} />  
           </div>
-          <img onClick = {() => dispatch(changeHealth(id))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
+          <img onClick = {() => updatePlayer(id, "health", getRandomFeature("health"))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
         </div>
         <div className="player-card__elem">
           <div className="player-card__elem__left">
@@ -41,28 +42,28 @@ const PlayerCardSettings: React.FC = () => {
               type="text" 
               value={card.hobby} />  
           </div>
-          <img onClick = {() => dispatch(changeHobby(id))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
+          <img onClick = {() => updatePlayer(id, "hobby", getRandomFeature("hobby"))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
         </div>
         <div className="player-card__elem">
           <div className="player-card__elem__left">
             <span>Фобия</span>
             <input onChange={(event) => alert(event.target.value)} type="text" value={card.phobia} />  
           </div>
-          <img onClick = {() => dispatch(changePhobia(id))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
+          <img onClick = {() => updatePlayer(id, "phobia", getRandomFeature("phobia"))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
         </div>
         <div className="player-card__elem">
           <div className="player-card__elem__left">
             <span>Факт 1</span>
             <input onChange={(event) => alert(event.target.value)} type="text" value={card.fact1} />  
           </div>
-          <img onClick = {() => dispatch(changeFact1(id))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
+          <img onClick = {() => updatePlayer(id, "fact1", getRandomFeature("fact1"))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
         </div>
         <div className="player-card__elem">
           <div className="player-card__elem__left">
             <span>Факт 2</span>
             <input onChange={(event) => alert(event.target.value)} type="text" value={card.fact2} />  
           </div>
-          <img onClick = {() => dispatch(changeFact2(id))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
+          <img onClick = {() => updatePlayer(id, "fact2", getRandomFeature("fact2"))} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />
         </div>
 
         <div className="player-card__midle">
