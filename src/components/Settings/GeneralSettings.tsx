@@ -23,7 +23,6 @@ async function resetCards() {
   localStorage.setItem('hobby', JSON.stringify(featuries.hobbies));
   localStorage.setItem('fact1', JSON.stringify(featuries.facts1));
   localStorage.setItem('fact2', JSON.stringify(featuries.facts2));
-  localStorage.setItem('gender', JSON.stringify(featuries.gender));
   localStorage.setItem('actionCard2', JSON.stringify(featuries.actionCard2));
   for(let i = 1; i<= 12; i++){
     await axios.put("http://localhost:5000/card", new InitialCard(i))
