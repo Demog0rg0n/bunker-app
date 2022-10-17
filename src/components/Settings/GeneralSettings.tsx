@@ -7,7 +7,7 @@ import { getBunker, getDisaster } from '../../redux/slices/headerSlice'
 import { resetVotes, startVoting } from '../../redux/slices/adminSlice';
 import { RootState } from '../../redux/storage';
 import axios from 'axios';
-import { InitialCard, InitialPlayer } from '../../redux/supportingScripts';
+import { InitialPlayer } from '../../redux/supportingScripts';
 
 async function resetPlayers(){
   for(let i = 1; i<= 12; i++){
@@ -16,6 +16,7 @@ async function resetPlayers(){
 }
 
 async function resetCards() {
+  localStorage.clear();
   localStorage.setItem('profession', JSON.stringify(featuries.professions));
   localStorage.setItem('age', JSON.stringify(featuries.age));
   localStorage.setItem('phobia', JSON.stringify(featuries.phobias));
@@ -24,9 +25,6 @@ async function resetCards() {
   localStorage.setItem('fact1', JSON.stringify(featuries.facts1));
   localStorage.setItem('fact2', JSON.stringify(featuries.facts2));
   localStorage.setItem('actionCard2', JSON.stringify(featuries.actionCard2));
-  for(let i = 1; i<= 12; i++){
-    await axios.put("http://localhost:5000/card", new InitialCard(i))
-  }
 }
 
 const HeaderSettings: React.FC = () => {
