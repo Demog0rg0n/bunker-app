@@ -28,7 +28,7 @@ const ActionCard: React.FC<ActionCardProps> = ({ actionCard1, actionCard2 }) => 
         {
           actionCard1 >= 0? 
             <>
-              <p>{actionCards1[actionCard1].description}</p>
+              <p>{ actionCards1[actionCard1].description }</p>
               <button onClick={() => dispatch(actionCards1[actionCard1].func(+id))} className='cardButton'>Использовать</button>
             </>:
             "??????????"

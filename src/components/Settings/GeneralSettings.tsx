@@ -7,12 +7,12 @@ import { getBunker, getDisaster } from '../../redux/slices/headerSlice'
 import { resetVotes, startVoting } from '../../redux/slices/adminSlice';
 import { RootState } from '../../redux/storage';
 import axios from 'axios';
-import { InitialPlayer } from '../../redux/supportingScripts';
+import { Player } from '../../redux/supportingScripts';
 
-async function resetPlayers(){
-  for(let i = 1; i<= 12; i++){
-    await axios.put("http://localhost:5000/player", new InitialPlayer(i))
-  }
+function reset(players: Player[]){
+  for(let i = 0; i < 12; i++){
+    axios.put("http://localhost:5000/player", players[i])
+  } 
 }
 
 async function resetCards() {
@@ -29,6 +29,8 @@ async function resetCards() {
 
 const HeaderSettings: React.FC = () => {
   const { bunker, disaster } = useSelector((state: RootState) => state.Header)
+  const players = useSelector((state: RootState) => state.Players.players)
+
   const dispatch = useDispatch();
   return (
     <div className="header-settings">
@@ -51,7 +53,7 @@ const HeaderSettings: React.FC = () => {
         <div className="general">
           <h1 className="settings-title">Общие настройки</h1>
           <button onClick = {() => resetCards()} className="settings__button">Сбросить карточки</button>
-          <button onClick = {() => resetPlayers()} className="settings__button">Сбросить игроков</button>
+          <button onClick = {() => reset(players)} className="settings__button">Сбросить </button>
           <button onClick = {() => dispatch(resetVotes())} className="settings__button">Сбросить голоса</button>
           <button onClick = {() => dispatch(startVoting())} className="settings__button">Голосование</button>
         </div>

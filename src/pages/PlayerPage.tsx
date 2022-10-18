@@ -9,14 +9,14 @@ import ActionCard from '../components/ActionCard';
 import { RootState } from '../redux/storage';
 
 const PlayerPage: React.FC = () => {
-    const cards = useSelector((state: RootState) => state.Players.playersCard)
+    const cards = useSelector((state: RootState) => state.Players.players)
     return (
         <div className="wrapper">
             <>
             <Routes>
             {
                 cards.map((card, index) => (
-                    <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard actionCard1={card.actionCard1} actionCard2={card.actionCard2} />} />
+                    <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard actionCard1={card.actionCard1} actionCard2={card.actionCard2.value} />} />
                 ))
             }    
             </Routes>
