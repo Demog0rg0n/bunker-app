@@ -53,9 +53,6 @@ export const cardSlice = createSlice({
     setPlayers(state, action){
       state.players = action.payload
     },
-    generateCard(state, { payload }: PayloadAction<number>) {
-      state.players[payload - 1] = new Player(payload);
-    },
     removePlayer(state, { payload }: PayloadAction<number>) {
       state.players[payload - 1].isExiled = true;
     },
@@ -98,7 +95,6 @@ export const cardSlice = createSlice({
 })
 
 export const {
-  generateCard,
   showFeature,
   getName,
   changeProfession,
