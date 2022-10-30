@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { getName, showFeature } from '../redux/slices/playerSlice'
 import { Player } from '../redux/supportingScripts'
 
-const Card: React.FC<Player> = ({ id, name, profession, age, gender, health, phobia, hobby, fact1, fact2, isGenerated }) => {
+const Card: React.FC<Player> = (player) => {
   const dispatch = useDispatch()
   
   return (
