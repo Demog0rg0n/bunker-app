@@ -1,21 +1,13 @@
 import React from 'react'
 
-import { useSelector } from 'react-redux'
-
-import { RootState } from '../redux/storage'
 import { Player } from '../redux/supportingScripts'
 
-const Camera: React.FC<Player> = ( { id, age, name, profession, health, gender, hobby, phobia, fact1, fact2} ) => {
-  const { votes, isStarted } = useSelector((state: RootState) => state.Votes)
-  const [active, setActive] = React.useState(false)
-  React.useEffect(() => {
-    setActive(isStarted)
-  }, [isStarted])
+const Camera: React.FC<Player> = ( { id, age, name, profession, health, gender, hobby, phobia, fact1, fact2, votes} ) => {
   return (
     <div className="cam">
-        <div className = { active? "cam__votes active": "cam__votes"}>
-          { votes[+id - 1].length > 0 ?
-              votes[+id - 1].join(","): ""
+        <div className = { votes.length > 0? "cam__votes active": "cam__votes"}>
+          { votes.length && 
+              votes.join(",")
           }
         </div>
         <div className="cam__left">

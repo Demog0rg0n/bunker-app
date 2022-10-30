@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 
 import {
-  stealFeature,
   Player,
-  changeFeature,
+  getRandomFeature,
 } from '../supportingScripts';
 
 export type ShowFeatureType = {
@@ -18,35 +16,15 @@ export type ShowFeatureType = {
   fact2: string;
 }
 
-export interface CardSliceState {
+export interface playerSliceState {
   players: Player[];
 }
 
-export function updatePlayer(id: number, featureType: string, feature: {value: string, isShowed: boolean}) {
-  axios.put("http://localhost:5000/feature", {
-    id,
-    [featureType]: feature
-  })
-}
-
-const initialState: CardSliceState = {
-  players: [
-    new Player(1),
-    new Player(2),
-    new Player(3),
-    new Player(4),
-    new Player(5),
-    new Player(6),
-    new Player(7),
-    new Player(8),
-    new Player(9),
-    new Player(10),
-    new Player(11),
-    new Player(12),
-  ],
+const initialState: playerSliceState = {
+  players: Array(12),
 };
 
-export const cardSlice = createSlice({
+export const playerSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
@@ -56,58 +34,40 @@ export const cardSlice = createSlice({
     removePlayer(state, { payload }: PayloadAction<number>) {
       state.players[payload - 1].isExiled = true;
     },
+    generateCard(state, { payload }: PayloadAction<number>) {
+      state.players[payload] = new Player(payload + 1)
+    },
     showFeature(state, { payload }: PayloadAction<{feature: string, id: number}>) {
-      state.players[payload.id - 1][payload.feature as keyof ShowFeatureType].isShowed = true
-      console.log(state.players[payload.id - 1][payload.feature as keyof ShowFeatureType])
-      updatePlayer(payload.id, payload.feature, state.players[payload.id - 1][payload.feature as keyof ShowFeatureType])
+      if(state.players[payload.id - 1] ) {
+        state.players[payload.id - 1][payload.feature as keyof ShowFeatureType].isShowed = true
+      }
     },
     getName(state, { payload }: PayloadAction<{name: string, id: number}>) {
       state.players[payload.id - 1].name = payload.name;
     },
-    changeProfession(state, action: PayloadAction<number>) {
-      changeFeature(state, action.payload, 'profession');
+    getVote(state, { payload }: PayloadAction<{id: number, vote: string}>) {
+      state.players[+payload.vote - 1].votes.push(payload.id)
     },
-    changeHealth(state, action: PayloadAction<number>) {
-      changeFeature(state, action.payload, 'health');
+    changeFeature(state, { payload }: PayloadAction<{ id: number, feature: string }>) {
+      state.players[payload.id - 1][payload.feature as keyof ShowFeatureType] = getRandomFeature(payload.feature)
     },
-    changePhobia(state, action: PayloadAction<number>) {
-      changeFeature(state, action.payload, 'phobia');
-    },
-    changeFact1(state, action: PayloadAction<number>) {
-      changeFeature(state, action.payload, 'fact1');
-    },
-    changeFact2(state, action: PayloadAction<number>) {
-      changeFeature(state, action.payload, 'fact2');
-    },
-    changeHobby(state, action: PayloadAction<number>) {
-      changeFeature(state, action.payload, 'hobby');
-    },
-    stealProfession(state, { payload }: PayloadAction<number>) {
-      stealFeature(state, 'profession', payload);
-    },
-    stealHealth(state, { payload }: PayloadAction<number>) {
-      stealFeature(state, 'health', payload);
-    },
-    stealPhobia(state, { payload }: PayloadAction<number>) {
-      stealFeature(state, 'phobia', payload);
+    resetVotes(state) {
+      for(let i = 0; i < 12; i++){
+        state.players[i].votes = []
+      }
     },
   },
 })
 
 export const {
   showFeature,
+  changeFeature,
   getName,
-  changeProfession,
-  changeHealth,
-  changePhobia,
-  changeFact1,
-  changeFact2,
-  changeHobby,
-  stealHealth,
-  stealPhobia,
-  stealProfession,
+  getVote,
+  resetVotes,
+  generateCard,
   removePlayer,
   setPlayers
-} = cardSlice.actions;
+} = playerSlice.actions;
 
-export default cardSlice.reducer;
+export default playerSlice.reducer;

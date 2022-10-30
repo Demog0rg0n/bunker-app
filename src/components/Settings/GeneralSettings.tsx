@@ -3,20 +3,13 @@ import React from 'react'
 import featuries from '../../characteristics.json'
 
 import { useSelector, useDispatch } from 'react-redux'
+
 import { getBunker, getDisaster } from '../../redux/slices/headerSlice'
-import { resetVotes, startVoting } from '../../redux/slices/adminSlice';
+import { resetVotes } from '../../redux/slices/playerSlice';
 import { RootState } from '../../redux/storage';
-import axios from 'axios';
-import { Player } from '../../redux/supportingScripts';
 
-// function reset(players: Player[]){
-//   for(let i = 0; i < 12; i++){
-//     axios.put("http://localhost:5000/player", players[i])
-//   } 
-// }
-
-async function resetCards(players: Player[]) {
-  localStorage.clear();
+async function resetCards() {
+  localStorage.clear()
   localStorage.setItem('profession', JSON.stringify(featuries.professions));
   localStorage.setItem('age', JSON.stringify(featuries.age));
   localStorage.setItem('phobia', JSON.stringify(featuries.phobias));
@@ -25,14 +18,10 @@ async function resetCards(players: Player[]) {
   localStorage.setItem('fact1', JSON.stringify(featuries.facts1));
   localStorage.setItem('fact2', JSON.stringify(featuries.facts2));
   localStorage.setItem('actionCard2', JSON.stringify(featuries.actionCard2));
-  for(let i = 0; i < 12; i++){
-    axios.put("http://localhost:5000/player", players[i])
-  } 
 }
 
 const HeaderSettings: React.FC = () => {
   const { bunker, disaster } = useSelector((state: RootState) => state.Header)
-  const players = useSelector((state: RootState) => state.Players.players)
 
   const dispatch = useDispatch();
   return (
@@ -47,7 +36,6 @@ const HeaderSettings: React.FC = () => {
         </textarea>
         <span>Бункер</span>
         <textarea
-          wrap='hard'
           onChange={(event) => dispatch(getBunker(event.target.value))} 
           value = {bunker}
           cols = {45}
@@ -55,10 +43,8 @@ const HeaderSettings: React.FC = () => {
         </textarea>
         <div className="general">
           <h1 className="settings-title">Общие настройки</h1>
-          <button onClick = {() => resetCards(players)} className="settings__button">Сбросить карточки</button>
-          {/* <button onClick = {() => reset(players)} className="settings__button">Сбросить </button> */}
+          <button onClick = {() => resetCards()} className="settings__button">Сбросить карточки</button>
           <button onClick = {() => dispatch(resetVotes())} className="settings__button">Сбросить голоса</button>
-          <button onClick = {() => dispatch(startVoting())} className="settings__button">Голосование</button>
         </div>
       </div>
   )

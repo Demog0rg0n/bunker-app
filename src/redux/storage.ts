@@ -1,7 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import Players from './slices/playerSlice';
 import Header from './slices/headerSlice';
-import Votes from './slices/adminSlice';
 
 import {
   persistStore,
@@ -12,7 +11,6 @@ import storage from 'redux-persist/lib/storage';
 const rootReducer = combineReducers({
   Players,
   Header,
-  Votes,
 });
 
 const persistConfig = {

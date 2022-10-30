@@ -1,21 +1,20 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { changeProfession, changeHealth, changePhobia, stealHealth, stealPhobia, stealProfession } from '../redux/slices/playerSlice'
 
 import '../styles/actionCard.css'
 
 const actionCards1 =  [
-  { func: changeProfession, description: 'Меняет текущую профессию на новую' },
-  { func: changePhobia, description: 'Меняет текущую фобию на новую' },
-  { func: changeHealth, description: 'Меняет текущее здоровье на новое' },
-  { func: stealHealth, description: 'Ворует здоровье у игрока перед вами' },
-  { func: stealPhobia, description: 'Ворует фобию у игрока перед вами' },
-  { func: stealProfession, description: 'Ворует профессию у игрока перед вами' },
+  'Меняет текущую профессию на новую',
+  'Меняет текущую фобию на новую',
+  'Меняет текущее здоровье на новое',
+  'Ворует здоровье у игрока перед вами',
+  'Ворует фобию у игрока перед вами',
+  'Ворует профессию у игрока перед вами',
 ]
 
 type ActionCardProps = {
-  actionCard1: number;
-  actionCard2: string;
+  actionCard1?: number;
+  actionCard2?: string;
 }
 
 const ActionCard: React.FC<ActionCardProps> = ({ actionCard1, actionCard2 }) => {
@@ -26,10 +25,9 @@ const ActionCard: React.FC<ActionCardProps> = ({ actionCard1, actionCard2 }) => 
       <div className='action-card'>
         <h1>Карточка действий 1</h1>
         {
-          actionCard1 >= 0? 
+          actionCard1?
             <>
-              <p>{ actionCards1[actionCard1].description }</p>
-              <button onClick={() => dispatch(actionCards1[actionCard1].func(+id))} className='cardButton'>Использовать</button>
+              <p>{ actionCards1[actionCard1] }</p>
             </>:
             "??????????"
         }

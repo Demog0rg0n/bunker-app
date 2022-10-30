@@ -7,6 +7,7 @@ import Webcams from '../components/Webcams'
 import Card from '../components/Card'
 import ActionCard from '../components/ActionCard';
 import { RootState } from '../redux/storage';
+import EmptyCard from '../components/EmptyCard';
 
 const PlayerPage: React.FC = () => {
     const cards = useSelector((state: RootState) => state.Players.players)
@@ -16,7 +17,10 @@ const PlayerPage: React.FC = () => {
             <Routes>
             {
                 cards.map((card, index) => (
-                    <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard actionCard1={card.actionCard1} actionCard2={card.actionCard2.value} />} />
+                    card?
+                    <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard actionCard1={card.actionCard1} actionCard2={card.actionCard2.value} />} />:
+                    <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard />} />
+                    
                 ))
             }    
             </Routes>
@@ -24,7 +28,9 @@ const PlayerPage: React.FC = () => {
             <Routes>
             {
                 cards.map((card, index) => (
-                <Route key={ index + 1 } path={`/player${ index + 1 }`} element={<Card {...card}/>} />
+                    card?
+                    <Route key={ index + 1 } path={`/player${ index + 1 }`} element={<Card {...card}/>} />:
+                    <Route key={ index + 1 } path={`/player${ index + 1 }`} element={<EmptyCard id={index} />} />
                 ))
             }
             </Routes>

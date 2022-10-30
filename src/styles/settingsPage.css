@@ -7,6 +7,10 @@
     border: 1px solid rgb(0, 0, 0);
 }
 
+h4 {
+    font-weight: 500;
+}
+
 .main-settings{
     display: flex;
     justify-content: center;
@@ -54,7 +58,7 @@
 .player-card{
     position: relative;
     width: 300px;
-    height: 510px;
+    height: 520px;
     background-color: rgb(255, 255, 255);
     padding: 10px;
     margin-left: 30px;
@@ -67,6 +71,9 @@
 
 .player-card__elem img{
     height: 50px;
+    margin-left: 20px;
+    position: relative;
+    top: 10px;
 }
 
 .player-card__elem input{
