@@ -34,8 +34,16 @@ export const playerSlice = createSlice({
     removePlayer(state, { payload }: PayloadAction<number>) {
       state.players[payload - 1].isExiled = true;
     },
-    generateCard(state, { payload }: PayloadAction<number>) {
-      state.players[payload] = new Player(payload + 1)
+    setCard(state, { payload }: PayloadAction<Player>) {
+      state.players[payload.id - 1] = payload
+    },
+    generateCard(state, { payload }: PayloadAction<{index: number, socket?: WebSocket}>) {
+      state.players[payload.index] = new Player(payload.index + 1)
+      const message = {
+        event: "generate-card",
+        data: state.players[payload.index]
+      }
+      payload.socket?.send(JSON.stringify(message))
     },
     showFeature(state, { payload }: PayloadAction<{feature: string, id: number}>) {
       if(state.players[payload.id - 1] ) {
@@ -64,6 +72,7 @@ export const {
   changeFeature,
   getName,
   getVote,
+  setCard,
   resetVotes,
   generateCard,
   removePlayer,

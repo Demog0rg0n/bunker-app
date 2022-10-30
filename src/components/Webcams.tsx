@@ -3,7 +3,6 @@ import Camera from './Camera'
 import '../styles/webcams.css'
 
 import { useSelector } from 'react-redux'
-import ExiledPlayer from './ExiledPlayer'
 import { RootState } from '../redux/storage'
 import EmptyCamera from './EmptyCamera'
 
@@ -13,10 +12,8 @@ const Webcams: React.FC = () => {
     <div className="webcams">
       { 
         players.map((player, index: number) => (
-          player?
-          !player.isExiled?
+          player !== null?
           <Camera key={ index + 1 }  {...player} />:
-          <ExiledPlayer key={ index + 1 }/>:
           <EmptyCamera key={ index + 1 }/>
         ))
       }
