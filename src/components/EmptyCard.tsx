@@ -8,7 +8,7 @@ const EmptyCard = ({id}: {id: number}) => {
     const socket = React.useRef<WebSocket>()
 
     React.useEffect(() => {
-      socket.current = new WebSocket("ws://steel-hot-rhinoceros.glitch.me")
+      socket.current = new WebSocket("wss://steel-hot-rhinoceros.glitch.me")
 
       socket.current.onmessage = (message) => {
         const newMessage: { event: string, data: Player } = JSON.parse(message.data)

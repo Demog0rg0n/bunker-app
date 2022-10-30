@@ -11,7 +11,7 @@ const PlayerCardSettings: React.FC = () => {
   const dispatch = useDispatch()
   const socket = React.useRef<WebSocket>()
 
-  socket.current = new WebSocket("ws://steel-hot-rhinoceros.glitch.me")
+  socket.current = new WebSocket("wss://steel-hot-rhinoceros.glitch.me")
 
   function sendVote(id: number, vote: string) {
     const message = {

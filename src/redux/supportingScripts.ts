@@ -14,7 +14,6 @@ export function getRandomFeature(key: string) {
   let arr: string[] = JSON.parse(localStorage.getItem(key) as string);
   let randIndex = getRandomInt(0, arr.length - 1);
   let randFeature: string = arr.splice(randIndex, 1).toString();
-  console.log(arr)
   localStorage.setItem(key, JSON.stringify(arr));
   return { value: randFeature, isShowed: false };
 }

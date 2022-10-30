@@ -22,7 +22,7 @@ const Card: React.FC<Player> = (player) => {
   }
 
   React.useEffect(() => {
-    socket.current = new WebSocket("ws://steel-hot-rhinoceros.glitch.me")
+    socket.current = new WebSocket("wss://steel-hot-rhinoceros.glitch.me")
 
     socket.current.onopen = () => {
       console.log("Подключено")
