@@ -17,6 +17,7 @@ async function resetCards() {
   localStorage.setItem('hobby', JSON.stringify(featuries.hobbies));
   localStorage.setItem('fact1', JSON.stringify(featuries.facts1));
   localStorage.setItem('fact2', JSON.stringify(featuries.facts2));
+  localStorage.setItem('actionCard1', JSON.stringify(featuries.actionCard1));
   localStorage.setItem('actionCard2', JSON.stringify(featuries.actionCard2));
 }
 

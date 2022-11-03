@@ -1,17 +1,30 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { removePlayer } from '../../redux/slices/playerSlice'
+import { removePlayer, setCard, showFeature } from '../../redux/slices/playerSlice'
 import { RootState } from '../../redux/storage'
 import { changeFeature } from '../../redux/slices/playerSlice'
+import { Player } from '../../redux/supportingScripts'
 
 const PlayerCardSettings: React.FC = () => {
   const [id, setId] = React.useState(1)
   const card = useSelector((state: RootState) => state.Players.players)[id - 1]
   const dispatch = useDispatch()
   const socket = React.useRef<WebSocket>()
-
-  socket.current = new WebSocket("wss://steel-hot-rhinoceros.glitch.me")
+  React.useEffect(() => {
+    socket.current = new WebSocket("wss://steel-hot-rhinoceros.glitch.me")
+    socket.current.onmessage = (message) => {
+      const newMessage: { event: string, data: Player } = JSON.parse(message.data)
+      switch(newMessage.event) {
+        case "generate-card":
+          dispatch(setCard(newMessage.data))
+          break;
+      }
+    }
+    socket.current.onopen = () => {
+      console.log("Подключено")
+    }
+  }, [])
 
   function sendVote(id: number, vote: string) {
     const message = {

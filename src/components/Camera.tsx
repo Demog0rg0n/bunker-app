@@ -2,9 +2,20 @@ import React from 'react'
 
 import { Player } from '../redux/supportingScripts'
 
-const Camera: React.FC<Player> = ( { id, age, name, profession, health, gender, hobby, phobia, fact1, fact2, votes} ) => {
+const Camera: React.FC<Player> = ( { id, age, name, profession, health, gender, hobby, phobia, fact1, fact2, votes, camera} ) => {
   return (
     <div className="cam">
+        <div 
+          className={camera.isMirrored? "cam__image isMirrored": "cam__image"} >
+          <iframe 
+            title={`player ${id}`}
+            loading="lazy"
+            width="427" 
+            height="240"
+            src={camera.link}
+            frameBorder="0">
+        </iframe>
+        </div>
         <div className = { votes.length > 0? "cam__votes active": "cam__votes"}>
           { votes.length && 
               votes.join(",")

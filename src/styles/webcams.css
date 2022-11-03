@@ -1,3 +1,9 @@
+video {
+    width: 430px;
+    height: auto;
+    max-height: 440px;
+}
+
 .wrapper{
     overflow: hidden;
     display: flex;
@@ -17,6 +23,7 @@
 
 .cam{
     position: relative;
+    z-index: 100;
     font-size: 18px;
     align-items: flex-end;
     justify-content: space-between;
@@ -24,9 +31,10 @@
 }
 
 .cam,
-.exiled-player{
+.exiled-player,
+.player-info{
     z-index: 1;
-    width: 440px;
+    width: 427px;
     margin: 5px;
     height: 240px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -34,8 +42,60 @@
     display: flex;
     color: white;
     position: relative;
-    
 }
+
+.cam__image {
+    position: absolute;
+    bottom: -4px;
+    z-index: 1;
+}
+
+.mirroring-block{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.isMirrored{
+    transform: scale(-1, 1);
+}
+
+.custom-checkbox{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.custom-checkbox+label{
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.custom-checkbox+label::before{
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #000000;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.custom-checkbox:checked+label:before{
+    background-color: rgb(46, 209, 21);
+}
+
+
 
 .cam__img{
     width: 440px;
@@ -91,12 +151,16 @@
     flex-direction: column;
     justify-content: space-between;
     height: 97%;
+    position: relative;
+    z-index: 10;
 }
 
 .cam__right{
     margin: 5px;
     text-align: right;
     width: 180px;
+    position: relative;
+    z-index: 10;
 }
 
 .cam__feature{
@@ -124,4 +188,8 @@
     color:rgb(0, 0, 0);
     background-color: rgb(249, 129, 44);
     background: linear-gradient(90deg, rgb(249, 129, 44), rgba(255, 255, 255, 0));
+}
+
+#playButton {
+    height: 100px;
 }

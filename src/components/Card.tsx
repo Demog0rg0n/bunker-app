@@ -4,7 +4,7 @@ import '../styles/card.css'
 
 import { useDispatch } from 'react-redux'
 
-import { getName, getVote, showFeature } from '../redux/slices/playerSlice'
+import { getCam, getName, getVote, setMirrored, showFeature } from '../redux/slices/playerSlice'
 import { Player } from '../redux/supportingScripts'
 
 const Card: React.FC<Player> = (player) => {
@@ -61,14 +61,22 @@ const Card: React.FC<Player> = (player) => {
       <div className="specifications__elem">Номер игрока: {player.id}</div>
       <span>Имя</span>
       <input onChange={(event) => dispatch(getName( {name: event.target.value, id: player.id} ))} value = {player.name} type="text" className="specifications__input" />
-      <div onClick={() => updateFeature("gender") } className="specifications__elem">Пол: {player.gender.value}</div>
-      <div onClick={() => updateFeature("age") } className="specifications__elem">Возраст: {player.age.value} лет</div>
+      <span>Ссылка на OBS</span>
+      <input onChange={(event) => dispatch(getCam( {link: event.target.value, id: player.id} ))} value = {player.camera.link} type="text" className="specifications__input" />
+      <div onClick={() => updateFeature("gender")} className="specifications__elem">Пол: {player.gender.value}</div>
+      <div onClick={() => updateFeature("age")} className="specifications__elem">Возраст: {player.age.value} лет</div>
       <div onClick={() => updateFeature("profession")} className="specifications__elem">Профессия:<br />{player.profession.value}</div>
       <div onClick={() => updateFeature("health")} className="specifications__elem">Здоровье:<br />{player.health.value}</div>
       <div onClick={() => updateFeature("phobia")} className="specifications__elem">Фобия:<br />{player.phobia.value}</div>
       <div onClick={() => updateFeature("hobby")} className="specifications__elem">Хобби:<br />{player.hobby.value}</div>
       <div onClick={() => updateFeature("fact1")} className="specifications__elem">Факт 1:<br />{player.fact1.value}</div>
       <div onClick={() => updateFeature("fact2")} className="specifications__elem">Факт 2:<br />{player.fact2.value}</div>
+      <div className="mirroring-block">
+        <span>Отзеркаливание</span>
+        <input type="checkbox" id='mirroring' className='custom-checkbox' onClick={() => dispatch(setMirrored(player.id))}/>
+        <label htmlFor="mirroring"></label>
+      </div>
+      
     </div>
   )
 }

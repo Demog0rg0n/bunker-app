@@ -18,7 +18,7 @@ const PlayerPage: React.FC = () => {
             {
                 cards.map((card, index) => (
                     card?
-                    <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard actionCard1={card.actionCard1} actionCard2={card.actionCard2.value} />} />:
+                    <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard actionCard1={card.actionCard1} actionCard2={card.actionCard2} />} />:
                     <Route key={index + 1} path={`/player${ index + 1 }`} element={<ActionCard />} />
                     
                 ))

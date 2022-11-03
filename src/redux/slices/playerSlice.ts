@@ -37,6 +37,9 @@ export const playerSlice = createSlice({
     setCard(state, { payload }: PayloadAction<Player>) {
       state.players[payload.id - 1] = payload
     },
+    setMirrored(state, { payload }: PayloadAction<number>) {
+      state.players[payload - 1].camera.isMirrored = !state.players[payload - 1].camera.isMirrored
+    },
     generateCard(state, { payload }: PayloadAction<{index: number, socket?: WebSocket}>) {
       state.players[payload.index] = new Player(payload.index + 1)
       const message = {
@@ -53,6 +56,9 @@ export const playerSlice = createSlice({
     getName(state, { payload }: PayloadAction<{name: string, id: number}>) {
       state.players[payload.id - 1].name = payload.name;
     },
+    getCam(state, { payload }: PayloadAction<{link: string, id: number}>) {
+      state.players[payload.id - 1].camera.link = payload.link
+    },
     getVote(state, { payload }: PayloadAction<{id: number, vote: string}>) {
       state.players[+payload.vote - 1].votes.push(payload.id)
     },
@@ -61,7 +67,9 @@ export const playerSlice = createSlice({
     },
     resetVotes(state) {
       for(let i = 0; i < 12; i++){
-        state.players[i].votes = []
+        if(state.players[i]){
+          state.players[i].votes = []
+        }
       }
     },
   },
@@ -72,7 +80,9 @@ export const {
   changeFeature,
   getName,
   getVote,
+  getCam,
   setCard,
+  setMirrored,
   resetVotes,
   generateCard,
   removePlayer,
