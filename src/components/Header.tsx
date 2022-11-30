@@ -22,9 +22,11 @@ const Header: React.FC = () => {
       </ul>
 
       <ul className="bunker"> 
-        {bunker?.map((element) => (
-          <li key={element}>{ element }</li>
-        ))}
+        {
+          bunker? bunker?.map((element) => (
+            <li key={element}>{ element }</li>
+          )): "Бункер:"
+        }
       </ul>
 
     </header>
