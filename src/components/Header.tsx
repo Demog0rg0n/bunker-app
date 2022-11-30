@@ -16,13 +16,13 @@ const Header: React.FC = () => {
       <div className="disaster">{ disaster }</div>
 
       <ul className="info"> 
-        {info.map((element) => (
+        {info?.map((element) => (
           <li key={element}>{ element }</li>
         ))}
       </ul>
 
       <ul className="bunker"> 
-        {bunker.map((element) => (
+        {bunker?.map((element) => (
           <li key={element}>{ element }</li>
         ))}
       </ul>
