@@ -6,12 +6,27 @@ import { RootState } from '../redux/storage'
 import '../styles/header.css'
 
 const Header: React.FC = () => {
-  const { bunker, disaster } = useSelector((state: RootState) => state.Header)
+
+  const { bunker, info, disaster } = useSelector((state: RootState) => state.Header)
+
   return (
     <header className="header">
-        <Link to={"/"} className="header__tittle">БУНКЕР</Link>
-        <div className="disaster">Катастрофа: { disaster }</div>
-        <div className="bunker">Бункер: <br />{ bunker }</div>
+      <Link to={"/"} className="logo">БУНКЕР</Link>
+
+      <div className="disaster">{ disaster }</div>
+
+      <ul className="info"> 
+        {info.map((element) => (
+          <li key={element}>{ element }</li>
+        ))}
+      </ul>
+
+      <ul className="bunker"> 
+        {bunker.map((element) => (
+          <li key={element}>{ element }</li>
+        ))}
+      </ul>
+
     </header>
   )
 }

@@ -5,8 +5,7 @@ import { Player } from '../redux/supportingScripts'
 const Camera: React.FC<Player> = ( { id, age, name, profession, health, gender, hobby, phobia, fact1, fact2, votes, camera} ) => {
   return (
     <div className="cam">
-        <div 
-          className={camera.isMirrored? "cam__image isMirrored": "cam__image"} >
+        <div className={camera.isMirrored? "cam__image isMirrored": "cam__image"} >
           <iframe 
             title={`player ${id}`}
             loading="lazy"
@@ -14,13 +13,15 @@ const Camera: React.FC<Player> = ( { id, age, name, profession, health, gender, 
             height="240"
             src={camera.link}
             frameBorder="0">
-        </iframe>
+          </iframe>
         </div>
+
         <div className = { votes.length > 0? "cam__votes active": "cam__votes"}>
-          { votes.length && 
-              votes.join(",")
+          {votes.length && 
+            votes.join(",")
           }
         </div>
+        
         <div className="cam__left">
           <div className="cam__left-top">
             <div className="cam__name">{ id + "." + name }</div>
@@ -35,6 +36,7 @@ const Camera: React.FC<Player> = ( { id, age, name, profession, health, gender, 
             <div className="cam__feature">{ phobia.isShowed? phobia.value: "Фобия" }</div>
           </div>
         </div>
+
         <div className="cam__right">
             <div className="cam__feature">{ hobby.isShowed? hobby.value: "Хобби" }</div>
             <div className="cam__feature">{ fact1.isShowed? fact1.value: "Факт 1" }</div>

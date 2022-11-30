@@ -1,18 +1,35 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { removePlayer, setCard, showFeature } from '../../redux/slices/playerSlice'
+import { removePlayer, setCard, ShowFeatureType } from '../../redux/slices/playerSlice'
 import { RootState } from '../../redux/storage'
 import { changeFeature } from '../../redux/slices/playerSlice'
 import { Player } from '../../redux/supportingScripts'
 
+import { sendVote } from '../../websocketControllers'
+
 const PlayerCardSettings: React.FC = () => {
+
+  const playerCardElems = [
+    {title: "Профессия", value: "profession"},
+    {title: "Здоровье", value: "health"},
+    {title: "Хобби", value: "hobby"},
+    {title: "Фобия", value: "phobia"},
+    {title: "Факт 1", value: "fact1"},
+    {title: "Факт 2", value: "fact2"},
+  ]
+
   const [id, setId] = React.useState(1)
   const card = useSelector((state: RootState) => state.Players.players)[id - 1]
+
   const dispatch = useDispatch()
+
   const socket = React.useRef<WebSocket>()
+
   React.useEffect(() => {
+
     socket.current = new WebSocket("wss://steel-hot-rhinoceros.glitch.me")
+
     socket.current.onmessage = (message) => {
       const newMessage: { event: string, data: Player } = JSON.parse(message.data)
       switch(newMessage.event) {
@@ -21,72 +38,33 @@ const PlayerCardSettings: React.FC = () => {
           break;
       }
     }
+
     socket.current.onopen = () => {
       console.log("Подключено")
     }
-  }, [])
 
-  function sendVote(id: number, vote: string) {
-    const message = {
-      event: "voting",
-      data: {
-        value: vote, id,
-      }
-    }
-    socket.current?.send(JSON.stringify(message))
-  }
+  }, [])
 
   function voting(id: number, key: string, value: string){
     if(key === "Enter"){
-      sendVote(id, value)
+      sendVote(id, value, socket.current)
     }
   }
 
   return (
     <div className="player-card">
         <h1 className="player-card__title">Настройки карточек</h1>
-        <div className="player-card__elem">
-          <div className="player-card__elem__left">
-            <h4>Профессия</h4>
-            <input onChange={(event) => alert(event.target.value)} type="text" value={ card === null? "?????????": card.profession.value } />  
-          </div>
-          { card !== null && <img onClick = {() => {dispatch(changeFeature({id, feature: "profession"}))}} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />}
-        </div>
-        <div className="player-card__elem">
-          <div className="player-card__elem__left">
-            <h4>Здоровье</h4>
-            <input onChange={(event) => alert(event.target.value)} type="text" value={ card === null? "?????????": card.health.value } />  
-          </div>
-          { card !== null && <img onClick = {() => {dispatch(changeFeature({id, feature: "health"}))}} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />}
-        </div>
-        <div className="player-card__elem">
-          <div className="player-card__elem__left">
-            <h4>Хобби</h4>
-            <input onChange={(event) => alert(event.target.value)} type="text" value={ card === null? "?????????": card.hobby.value } />  
-          </div>
-          { card !== null && <img onClick = {() => {dispatch(changeFeature({id, feature: "hobby"}))}} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />}
-        </div>
-        <div className="player-card__elem">
-          <div className="player-card__elem__left">
-            <h4>Фобия</h4>
-            <input onChange={(event) => alert(event.target.value)} type="text" value={ card === null? "?????????": card.phobia.value } />  
-          </div>
-          { card !== null && <img onClick = {() => {dispatch(changeFeature({id, feature: "phobia"}))}} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />}
-        </div>
-        <div className="player-card__elem">
-          <div className="player-card__elem__left">
-            <h4>Факт 1</h4>
-            <input onChange={(event) => alert(event.target.value)} type="text" value={ card === null? "?????????": card.fact1.value } />  
-          </div>
-          { card !== null && <img onClick = {() => {dispatch(changeFeature({id, feature: "fact1"}))}} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />}
-        </div>
-        <div className="player-card__elem">
-          <div className="player-card__elem__left">
-            <h4>Факт 2</h4>
-            <input onChange={(event) => alert(event.target.value)} type="text" value={ card === null? "?????????": card.fact2.value } />  
-          </div>
-          { card !== null && <img onClick = {() => {dispatch(changeFeature({id, feature: "fact2"}))}} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' /> }
-        </div>
+        {
+          playerCardElems.map(playerCardElem => (
+            <div key={playerCardElem.value} className="player-card__elem">
+              <div className="player-card__elem__left">
+                <h4>{playerCardElem.title}</h4>
+                <input onChange={() => {}} type="text" value={ card === null || card === undefined? "?????????": card[playerCardElem.value as keyof ShowFeatureType].value } />  
+              </div>
+              { card && <img onClick = {() => {dispatch(changeFeature({id, feature: "profession"}))}} src="https://cdn2.iconfinder.com/data/icons/roleplay-and-tabletop-dice-glyph/430/5_glyph-256.png" className="rerol-button" alt='' />}
+            </div>
+          ))
+        }
 
         <div className="player-card__midle">
           <div className="vote">

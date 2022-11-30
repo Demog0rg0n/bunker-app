@@ -40,7 +40,7 @@ export const playerSlice = createSlice({
     setMirrored(state, { payload }: PayloadAction<number>) {
       state.players[payload - 1].camera.isMirrored = !state.players[payload - 1].camera.isMirrored
     },
-    generateCard(state, { payload }: PayloadAction<{index: number, socket?: WebSocket}>) {
+    generateCard(state, { payload }: PayloadAction<{index: number, socket: WebSocket | undefined}>) {
       state.players[payload.index] = new Player(payload.index + 1)
       const message = {
         event: "generate-card",

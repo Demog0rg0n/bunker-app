@@ -9,7 +9,7 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Gilroy-Medium', sans-serif;
+    font-size: 20px;
 }
 
 .webcams{
@@ -94,8 +94,6 @@ video {
 .custom-checkbox:checked+label:before{
     background-color: rgb(46, 209, 21);
 }
-
-
 
 .cam__img{
     width: 440px;
@@ -188,8 +186,4 @@ video {
     color:rgb(0, 0, 0);
     background-color: rgb(249, 129, 44);
     background: linear-gradient(90deg, rgb(249, 129, 44), rgba(255, 255, 255, 0));
-}
-
-#playButton {
-    height: 100px;
 }

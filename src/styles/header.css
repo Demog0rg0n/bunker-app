@@ -1,11 +1,11 @@
 body{
     margin: 0;
-    background: url(https://phonoteka.org/uploads/posts/2022-02/1644390923_45-phonoteka-org-p-igrovoi-fon-dlya-prezentatsii-48.jpg);
+    background: url(https://phonoteka.org/uploads/posts/2022-02/1643928296_1-phonoteka-org-p-temnii-beton-fon-1.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
     font-family: 'Gilroy-Medium', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .header{
@@ -20,21 +20,35 @@ body{
     font-family: 'Gilroy-Medium', sans-serif;
 }
 
-.header__tittle{
+.logo{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
     font-family: 'Gilroy-Bold', sans-serif;
-    font-size: 32px;
+    font-size: 56px;
     margin-left: 20px;
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
 
 .bunker{
-    width: 500px;
+    width: 300px;
 }
 
 .disaster{
-    text-overflow: clip;
-    font-size: 20px;
-    width: 500px;
+    width: 800px;
     font-family: 'Gilroy-Medium', sans-serif;
+}
+
+.info{
+    position: relative;
+    left: 100px;
+    width: 300px;
+}
+
+.info li:first-child,
+.bunker li:first-child{
+    position: relative;
+    right: 20px;
+    list-style: none;
 }

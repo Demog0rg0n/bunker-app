@@ -2,11 +2,10 @@ import React from 'react'
 
 import featuries from '../../characteristics.json'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { getBunker, getDisaster } from '../../redux/slices/headerSlice'
 import { resetVotes } from '../../redux/slices/playerSlice';
-import { RootState } from '../../redux/storage';
+import { addBunker, addInfo, setDisaster } from '../../redux/slices/headerSlice';
 
 async function resetCards() {
   localStorage.clear()
@@ -22,32 +21,35 @@ async function resetCards() {
 }
 
 const HeaderSettings: React.FC = () => {
-  const { bunker, disaster } = useSelector((state: RootState) => state.Header)
+  const [ bunker, setBunker ] = React.useState("")
+  const [ info, setInfo] = React.useState("")
 
   const dispatch = useDispatch();
   return (
-    <div className="header-settings">
+    <div className="settings">
+      <div className="header-settings">
         <h1 className="settings-title">Насройки шапки</h1>
-        <span>Катастрофа</span>
-        <textarea
-          onChange={(event) => dispatch(getDisaster(event.target.value))} 
-          value = {disaster}
-          cols = {45}
-          rows = {6}>
-        </textarea>
-        <span>Бункер</span>
-        <textarea
-          onChange={(event) => dispatch(getBunker(event.target.value))} 
-          value = {bunker}
-          cols = {45}
-          rows = {6} >
-        </textarea>
-        <div className="general">
-          <h1 className="settings-title">Общие настройки</h1>
-          <button onClick = {() => resetCards()} className="settings__button">Сбросить карточки</button>
-          <button onClick = {() => dispatch(resetVotes())} className="settings__button">Сбросить голоса</button>
+        <div className="bunker-settings">
+          <h3>Доп. информация</h3>
+          <input type="text" onChange={(event) => {setInfo(event.target.value)}} value={info}/>
+          <button onClick={() => {dispatch(addInfo(info))}} className='settings__button'>Добавить</button>
+        </div>
+        <div className="bunker-settings">
+          <h3>Бункер</h3>
+          <input type="text" onChange={(event) => {setBunker(event.target.value)}} value={bunker}/>
+          <button onClick={() => {dispatch(addBunker(bunker))}} className='settings__button'>Добавить</button>
+        </div>
+        <div className="disaster-settings">
+          <h3>Описание катастрофы</h3>
+          <textarea onChange={(event) => dispatch(setDisaster(event.target.value))} name="disaster" cols={40} rows={6}></textarea>
         </div>
       </div>
+      <div className="general-settings">
+        <h1 className="settings-title">Общие настройки</h1>
+        <button onClick = {() => resetCards()} className="settings__button">Сбросить карточки</button>
+        <button onClick = {() => dispatch(resetVotes())} className="settings__button">Сбросить голоса</button>
+      </div>
+    </div>
   )
 }
 

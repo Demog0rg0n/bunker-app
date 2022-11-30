@@ -11,9 +11,9 @@ import EmptyCard from '../components/EmptyCard';
 
 const PlayerPage: React.FC = () => {
     const cards = useSelector((state: RootState) => state.Players.players)
+    
     return (
         <div className="wrapper">
-            <>
             <Routes>
             {
                 cards.map((card, index) => (
@@ -34,8 +34,6 @@ const PlayerPage: React.FC = () => {
                 ))
             }
             </Routes>
-            </>
-            
         </div>
     )
 }

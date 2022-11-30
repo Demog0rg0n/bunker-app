@@ -9,8 +9,9 @@ p{
 
 .main{
     width: 100%;
+    margin-top: 15px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: 77vh;
 }
